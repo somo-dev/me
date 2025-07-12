@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Copy, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { Spotlight } from "../ui/spotlight-new";
 
 export default function Hero() {
   const [copied, setCopied] = useState(false);
@@ -77,10 +78,10 @@ export default function Hero() {
             <ArrowRight className="w-4 h-4 text-gray-400" />
           </div>
         </div>
-
         {/* Main Content */}
         <div className="text-center">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
+            <Spotlight />
             I help founders turn{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
               ideas
@@ -112,7 +113,7 @@ export default function Hero() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             
-            <button className=" hover:scale-105 inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
+            <button className=" hover:scale-105 inline-flex h-12 animate-shimmer items-center justify-center rounded-lg border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50">
               <a href="#contact" className="flex items-center space-x-2">
               Let's Connect ->
               </a>
@@ -133,7 +134,7 @@ export default function Hero() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div className="absolute left-1/2 transform-translate-x-1/2">
           <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-gradient-to-b from-blue-400 to-purple-400 rounded-full mt-2 animate-bounce" />
           </div>

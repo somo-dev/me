@@ -2,6 +2,30 @@
 
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
+
+const images = [
+  {
+    src: "/about/adv_trail.avif",
+    description: "I ride",
+  },
+  {
+    src: "/about/camera.avif",
+    description: "I click",
+  },
+  {
+    src: "/about/travel.avif",
+    description: "I travel",
+  },
+  {
+    src: "/about/gym.jpg",
+    description: "I train",
+  },
+  {
+    src: "/about/code.avif",
+    description: "I code",
+  },
+];
 
 export default function About() {
   return (
@@ -15,7 +39,7 @@ export default function About() {
                 More about me
               </span>
             </div>
-            
+
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               I'm Soumya, a<br />
               creative{" "}
@@ -29,16 +53,16 @@ export default function About() {
                 I'm Soumya Pal, a passionate full-stack developer passionate
                 about creating dynamic web experiences. From frontend to
                 backend, I build scalable solutions that deliver results and
-                efficient code. My expertise spans React, Next.js, and Node.js,
-                crafting clean code that users love.
+                efficient code. My expertise spans React, Next.js, Node, .Net
+                etc. crafting clean code that users love.
               </p>
-              
+
               <p>
                 When I'm not immersed in work, I'm exploring new ideas and
-                staying up-to-date on tech trends. I love embracing
-                challenges and delivering innovative solutions.
+                staying up-to-date on tech trends. I love embracing challenges
+                and delivering innovative solutions.
               </p>
-              
+
               <p>
                 I believe in writing clean code that eager to make a difference
                 in tech.
@@ -48,7 +72,7 @@ export default function About() {
             <div className="mt-8">
               <Button
                 asChild
-                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full px-8 py-3"
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full px-8 py-3 text-lg font-medium"
               >
                 <a href="#contact">Get in Touch</a>
               </Button>
@@ -57,20 +81,7 @@ export default function About() {
 
           {/* Image */}
           <div className="relative">
-            <div className="relative w-full h-96 rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-600/20 z-10" />
-              <Image
-                src="https://images.pexels.com/photos/1029604/pexels-photo-1029604.jpeg"
-                alt="Soumya Pal"
-                fill
-                className="object-cover"
-              />
-            </div>
-            
-            {/* Floating badge */}
-            <div className="absolute bottom-4 right-4 bg-gray-900/90 backdrop-blur-sm rounded-lg px-4 py-2 border border-gray-700">
-              <span className="text-white font-medium">I Travel</span>
-            </div>
+            <AnimatedTestimonials testimonials={images} />
           </div>
         </div>
       </div>

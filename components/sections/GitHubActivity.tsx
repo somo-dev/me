@@ -37,24 +37,24 @@ export default function GitHubActivity() {
   useEffect(() => {
     setMounted(true);
     // Generate mock contribution data only on client side
-    const generateContributions = () => {
-      const contributions = [];
-      const today = new Date();
-      
-      for (let i = 364; i >= 0; i--) {
-        const date = new Date(today);
-        date.setDate(date.getDate() - i);
-        
-        const level = Math.floor(Math.random() * 5); // 0-4 contribution levels
-        contributions.push({
-          date: date.toISOString().split('T')[0],
-          level,
-          count: level === 0 ? 0 : Math.floor(Math.random() * 10) + 1
-        });
-      }
-      
-      return contributions;
-    };
+const generateContributions = () => {
+  const contributions = [];
+  const today = new Date();
+  
+  for (let i = 364; i >= 0; i--) {
+    const date = new Date(today);
+    date.setDate(date.getDate() - i);
+    
+    const level = Math.floor(Math.random() * 5); // 0-4 contribution levels
+    contributions.push({
+      date: date.toISOString().split('T')[0],
+      level,
+      count: level === 0 ? 0 : Math.floor(Math.random() * 10) + 1
+    });
+  }
+  
+  return contributions;
+};
 
     setContributions(generateContributions());
   }, []);
@@ -119,37 +119,37 @@ export default function GitHubActivity() {
 
           {/* Contribution grid */}
           {mounted && (
-            <div className="mb-4">
-              <div className="grid grid-cols-53 gap-1 mb-4">
-                {contributions.map((contrib, index) => (
-                  <div
-                    key={index}
-                    className={`w-3 h-3 rounded-sm ${getContributionColor(contrib.level)} hover:ring-1 hover:ring-green-400 transition-all duration-200 cursor-pointer`}
-                    title={`${contrib.count} contributions on ${contrib.date}`}
-                  />
-                ))}
-              </div>
+          <div className="mb-4">
+            <div className="grid grid-cols-53 gap-1 mb-4">
+              {contributions.map((contrib, index) => (
+                <div
+                  key={index}
+                  className={`w-3 h-3 rounded-sm ${getContributionColor(contrib.level)} hover:ring-1 hover:ring-green-400 transition-all duration-200 cursor-pointer`}
+                  title={`${contrib.count} contributions on ${contrib.date}`}
+                />
+              ))}
+            </div>
+            
+            {/* Legend */}
+            <div className="flex items-center justify-between">
+              <span className="text-gray-400 text-sm">
+                {contributions.reduce((sum, c) => sum + c.count, 0)} contributions in the last year
+              </span>
               
-              {/* Legend */}
-              <div className="flex items-center justify-between">
-                <span className="text-gray-400 text-sm">
-                  {contributions.reduce((sum, c) => sum + c.count, 0)} contributions in the last year
-                </span>
-                
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-400 text-xs">Less</span>
-                  <div className="flex space-x-1">
-                    {[0, 1, 2, 3, 4].map((level) => (
-                      <div
-                        key={level}
-                        className={`w-3 h-3 rounded-sm ${getContributionColor(level)}`}
-                      />
-                    ))}
-                  </div>
-                  <span className="text-gray-400 text-xs">More</span>
+              <div className="flex items-center space-x-2">
+                <span className="text-gray-400 text-xs">Less</span>
+                <div className="flex space-x-1">
+                  {[0, 1, 2, 3, 4].map((level) => (
+                    <div
+                      key={level}
+                      className={`w-3 h-3 rounded-sm ${getContributionColor(level)}`}
+                    />
+                  ))}
                 </div>
+                <span className="text-gray-400 text-xs">More</span>
               </div>
             </div>
+          </div>
           )}
         </div>
       </div>

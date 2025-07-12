@@ -1,117 +1,8 @@
 "use client";
 
-import React, { createContext, useContext, useRef, useState } from "react";
+import React from "react";
+import { CardBody, CardContainer, CardItem } from "@/components/ui/3d-card";
 import { cn } from "@/lib/utils";
-
-// 3D Card Context
-const CardContext = createContext<{
-  mouseX: number;
-  mouseY: number;
-}>({
-  mouseX: 0,
-  mouseY: 0,
-});
-
-// 3D Card Container
-interface CardContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function CardContainer({
-  children,
-  className,
-  ...props
-}: CardContainerProps) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [mouseX, setMouseX] = useState(0);
-  const [mouseY, setMouseY] = useState(0);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    setMouseX(e.clientX - rect.left);
-    setMouseY(e.clientY - rect.top);
-  };
-
-  return (
-    <CardContext.Provider value={{ mouseX, mouseY }}>
-      <div
-        ref={ref}
-        onMouseMove={handleMouseMove}
-        className={cn("relative", className)}
-        {...props}
-      >
-        {children}
-      </div>
-    </CardContext.Provider>
-  );
-}
-
-// 3D Card Body
-interface CardBodyProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  className?: string;
-}
-
-export function CardBody({ children, className, ...props }: CardBodyProps) {
-  const { mouseX, mouseY } = useContext(CardContext);
-  const ref = useRef<HTMLDivElement>(null);
-
-  const rotateX = mouseY / 10;
-  const rotateY = -mouseX / 10;
-
-  return (
-    <div
-      ref={ref}
-      style={{
-        transform: `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-      }}
-      className={cn(
-        "transition-all duration-200 ease-out",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
-}
-
-// 3D Card Item
-interface CardItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  translateZ?: number;
-  as?: React.ElementType;
-  className?: string;
-}
-
-export function CardItem({
-  children,
-  translateZ = 0,
-  as: Component = "div",
-  className,
-  ...props
-}: CardItemProps) {
-  const { mouseX, mouseY } = useContext(CardContext);
-  const ref = useRef<HTMLDivElement>(null);
-
-  const rotateX = mouseY / 10;
-  const rotateY = -mouseX / 10;
-
-  return (
-    <Component
-      ref={ref}
-      style={{
-        transform: `perspective(1000px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`,
-      }}
-      className={cn("transition-all duration-200 ease-out", className)}
-      {...props}
-    >
-      {children}
-    </Component>
-  );
-}
 
 // Main AnimatedCard Component
 interface AnimatedCardProps {
@@ -163,7 +54,7 @@ export function AnimatedCard({
       >
         {title && (
           <CardItem
-            translateZ={50}
+            translateZ="50"
             className={cn(
               "text-xl font-bold text-neutral-600 dark:text-white",
               titleClassName
@@ -176,7 +67,7 @@ export function AnimatedCard({
         {description && (
           <CardItem
             as="p"
-            translateZ={60}
+            translateZ="60"
             className={cn(
               "text-neutral-500 text-sm max-w-sm mt-2 dark:text-neutral-300",
               descriptionClassName
@@ -187,7 +78,7 @@ export function AnimatedCard({
         )}
         
         {image && (
-          <CardItem translateZ={100} className="w-full mt-4">
+          <CardItem translateZ="100" className="w-full mt-4">
             <img
               src={image.src}
               height={image.height || 1000}
@@ -202,7 +93,7 @@ export function AnimatedCard({
         )}
         
         {children && (
-          <CardItem translateZ={70} className="w-full">
+          <CardItem translateZ="70" className="w-full">
             {children}
           </CardItem>
         )}
@@ -212,7 +103,7 @@ export function AnimatedCard({
             {actions.map((action, index) => (
               <CardItem
                 key={index}
-                translateZ={20}
+                translateZ="20"
                 as={action.href ? "a" : "button"}
                 {...(action.href ? { href: action.href, target: "__blank" } : {})}
                 {...(action.onClick ? { onClick: action.onClick } : {})}
