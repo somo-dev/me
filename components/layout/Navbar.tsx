@@ -62,12 +62,17 @@ export default function Navbar() {
 
           {/* CTA Button */}
           <div className="hidden md:block">
-            <Button
+            {/* <Button
               asChild
               className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full px-6 py-2"
             >
               <Link href="#contact">Book a Call</Link>
-            </Button>
+            </Button> */}
+            <button className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200 bg-gray-800/20 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-700 hover:border-gray-600">
+              <a href="#contact" className="flex items-center space-x-2">
+                Book a Call
+              </a>
+            </button>
           </div>
 
           {/* Mobile menu button */}
@@ -76,7 +81,11 @@ export default function Navbar() {
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white transition-colors duration-200"
             >
-              {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+              {isOpen ? (
+                <X className="w-6 h-6" />
+              ) : (
+                <Menu className="w-6 h-6" />
+              )}
             </button>
           </div>
         </div>
@@ -104,6 +113,11 @@ export default function Navbar() {
                     Book a Call
                   </Link>
                 </Button>
+                <button className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200 bg-gray-800/20 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-700 hover:border-gray-600">
+                  <a href="#contact" className="flex items-center space-x-2">
+                    Book a Call
+                  </a>
+                </button>
               </div>
             </div>
           </div>
