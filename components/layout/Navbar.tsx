@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Command } from "lucide-react";
+import { IconMail, IconMailCheck } from "@tabler/icons-react";
 import { Button } from "@/components/ui/button";
 
 const navigation = [
@@ -16,10 +17,28 @@ const navigation = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [activeSection, setActiveSection] = useState("#home");
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText("soumyapal.774@gmail.com");
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      // Find the currently active section
+      const sectionIds = navigation.map((item) => item.href.replace('#', ''));
+      let found = "#home";
+      for (const id of sectionIds) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 80) {
+          found = `#${id}`;
+        }
+      }
+      setActiveSection(found);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -51,9 +70,16 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                    className={
+                      activeSection === item.href
+                        ? "px-4 py-1 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative transition-colors duration-200"
+                        : "text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                    }
                   >
                     {item.name}
+                    {activeSection === item.href && (
+                      <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
+                    )}
                   </Link>
                 ))}
               </div>
@@ -68,11 +94,26 @@ export default function Navbar() {
             >
               <Link href="#contact">Book a Call</Link>
             </Button> */}
-            <button className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200 bg-gray-800/20 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-700 hover:border-gray-600">
-              <a href="#contact" className="flex items-center space-x-2">
-                Book a Call
-              </a>
-            </button>
+            <div className="flex items-center gap-2 mt-0">
+              <button
+                onClick={handleCopyEmail}
+                className={`h-9 flex items-center justify-center text-gray-300 hover:text-white transition-colors duration-200 rounded-full border relative ${copied ? "px-4 py-2 text-sm backdrop-blur-sm bg-emerald-300/10 border-emerald-500/20 text-white" : "px-4 py-1.5 text-sm bg-gray-800/20 backdrop-blur-sm border-gray-700 hover:border-gray-600"}`}
+                aria-label="Copy email address"
+              >
+                {copied ? (
+                  <IconMailCheck className="w-5 h-5" />
+                ) : (
+                  <IconMail className="w-5 h-5" />
+                )}
+                <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
+              </button>
+              <button className="px-4 py-2 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative">
+                <a href="#contact" className="flex items-center space-x-2">
+                  Book a Call
+                </a>
+                <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
+              </button>
+            </div>
           </div>
 
           {/* Mobile menu button */}
@@ -98,25 +139,37 @@ export default function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200"
+                  className={
+                    activeSection === item.href
+                      ? "block px-4 py-1 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative transition-colors duration-200"
+                      : "block px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200"
+                  }
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
+                  {activeSection === item.href && (
+                    <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
+                  )}
                 </Link>
               ))}
-              <div className="pt-2">
-                <Button
-                  asChild
-                  className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full"
+              <div className="pt-2 flex items-center gap-2">
+                <button
+                  onClick={handleCopyEmail}
+                  className={`flex items-center justify-center text-gray-300 hover:text-white transition-colors duration-200 rounded-full border relative ${copied ? "px-4 py-2 text-sm backdrop-blur-sm bg-emerald-300/10 border-emerald-500/20 text-white" : "px-4 py-1.5 text-sm bg-gray-800/20 backdrop-blur-sm border-gray-700 hover:border-gray-600"}`}
+                  aria-label="Copy email address"
                 >
-                  <Link href="#contact" onClick={() => setIsOpen(false)}>
-                    Book a Call
-                  </Link>
-                </Button>
-                <button className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200 bg-gray-800/20 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-700 hover:border-gray-600">
+                  {copied ? (
+                    <IconMailCheck className="w-5 h-5" />
+                  ) : (
+                    <IconMail className="w-5 h-5" />
+                  )}
+                  <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
+                </button>
+                <button className="px-4 py-2 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative">
                   <a href="#contact" className="flex items-center space-x-2">
                     Book a Call
                   </a>
+                  <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
                 </button>
               </div>
             </div>

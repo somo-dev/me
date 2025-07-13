@@ -17,7 +17,7 @@ export default function Home() {
         <Hero />
         <About />
         <Experience />
-        <GitHubActivity />
+        {/* <GitHubActivity /> */}
         <Portfolio />
         <Contact />
       </main>

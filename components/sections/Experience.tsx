@@ -2,44 +2,74 @@
 
 import { Badge } from "@/components/ui/badge";
 import { AnimatedCard } from "@/components/ui/animated-card";
+import { WavyBackground } from "../ui/wavy-background";
 
 const experiences = [
   {
     period: "JAN 2024 - PRESENT",
     company: "Roboto Studio",
     role: "Frontend Engineer",
-    description: "Architecting modern, client-driven development with expertise in JavaScript, ReactJS, and database management. Leading comprehensive full-stack development with React frontend using Tailwind CSS for sleek design and MongoDB backend supporting 50K+ users and facilitating over 1000 daily transactions.",
-    technologies: ["ReactJS", "Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Node.js"],
-    type: "Frontend"
+    description:
+      "Architecting modern, client-driven development with expertise in JavaScript, ReactJS, and database management. Leading comprehensive full-stack development with React frontend using Tailwind CSS for sleek design and MongoDB backend supporting 50K+ users and facilitating over 1000 daily transactions.",
+    technologies: [
+      "ReactJS",
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "MongoDB",
+      "Node.js",
+    ],
+    type: "Frontend",
   },
   {
-    period: "AUG 2023 - PRESENT", 
+    period: "AUG 2023 - PRESENT",
     company: "GitHub",
     role: "Open Source Contributor",
-    description: "Contributing to open-source projects with 5K+ GitHub contributions, tackling complex issues through collaborative development and supporting the global developer community with impactful code contributions.",
+    description:
+      "Contributing to open-source projects with 5K+ GitHub contributions, tackling complex issues through collaborative development and supporting the global developer community with impactful code contributions.",
     technologies: ["React", "TypeScript", "Node.js", "Git", "JavaScript"],
-    type: "Open Source"
-  }
+    type: "Open Source",
+  },
 ];
 
 export default function Experience() {
   return (
-    <section id="work" className="py-20 bg-gray-900">
+    <WavyBackground
+      id="work"
+      className="py-20 max-w-4xl mx-auto pb-40"
+      containerClassName="relative w-full flex flex-col items-center justify-center"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <span className="text-gray-400 text-sm uppercase tracking-wider">
             My Journey
           </span>
           <h2 className="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
-            Experience That<br />
+            Experience That
+            <br />
             Brings{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 italic">
-              Ideas to Life
+            <span className="relative inline-block">
+              <span
+                className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 italic z-10 relative"
+                style={{ position: "relative" }}
+              >
+                Ideas to Life
+              </span>
+              <span
+                className="absolute inset-0 rounded-lg bg-black/60 z-0"
+                style={{ filter: "blur(2px)" }}
+              ></span>
             </span>
           </h2>
+          <button className="px-6 py-3 text-lg backdrop-blur-sm border bg-gray-900/80 border-emerald-500/60 text-white rounded-full relative shadow-lg">
+            <a href="#contact" className="flex items-center space-x-2">
+              🚀 Embark on My Career Odyssey!
+            </a>
+            <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
+          </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {experiences.map((exp, index) => (
             <AnimatedCard
               key={index}
@@ -79,8 +109,8 @@ export default function Experience() {
               </div>
             </AnimatedCard>
           ))}
-        </div>
+        </div> */}
       </div>
-    </section>
+    </WavyBackground>
   );
 }

@@ -96,27 +96,6 @@ export default function Hero() {
             {/* Radial Gradient to prevent sharp edges */}
             <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(850px_200px_at_top,transparent_20%,white)]"></div>
           </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6 mb-2 -mt-24">
-            <button className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200 bg-gray-800/20 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-700 hover:border-gray-600">
-              <a href="#contact" className="flex items-center space-x-2">
-                Let&apos;s Connect -{">"}
-              </a>
-            </button>
-
-            <button
-              onClick={handleCopyEmail}
-              className="flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200 bg-gray-800/20 backdrop-blur-sm rounded-full px-6 py-3 border border-gray-700 hover:border-gray-600"
-            >
-              {copied ? (
-                <Check className="w-5 h-5 text-green-400" />
-              ) : (
-                <Copy className="w-5 h-5" />
-              )}
-              <span>soumyapal.774@gmail.com</span>
-            </button>
-          </div>
         </div>
       </div>
 
