@@ -3,6 +3,8 @@
 import Link from "next/link";
 import { Github, Linkedin, Twitter, Mail } from "lucide-react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const footerLinks = {
   General: [
     { name: "About", href: "#about" },
@@ -36,8 +38,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-1">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-lime-accent rounded-full flex items-center justify-center">
-                <span className="text-gray-900 font-bold text-sm">SP</span>
+              <div className="w-8 h-8 bg-lime-accent rounded-full flex items-center justify-center overflow-hidden">
+                <img
+                  src={`${basePath}/about/man.png`}
+                  alt="Soumya Pal"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <span className="text-white font-bold text-xl">Soumya Pal</span>
             </div>
