@@ -1,109 +1,48 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { ArrowRight, Copy, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import { Spotlight } from "../ui/spotlight-new";
-import { SparklesCore } from "../ui/sparkles";
+import { ArrowRight } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const Globe = dynamic(() => import("@/components/ui/globe"), { ssr: false });
 
 export default function Hero() {
-  const [copied, setCopied] = useState(false);
-  const [stars, setStars] = useState<
-    Array<{
-      id: number;
-      left: number;
-      top: number;
-      delay: number;
-      duration: number;
-    }>
-  >([]);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-    // Generate stars only on client side
-    const generatedStars = Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      left: Math.random() * 100,
-      top: Math.random() * 100,
-      delay: Math.random() * 3,
-      duration: 2 + Math.random() * 2,
-    }));
-    setStars(generatedStars);
-  }, []);
-
-  const handleCopyEmail = async () => {
-    await navigator.clipboard.writeText("hello@soumyapal.dev");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <section
       id="home"
-      className="min-h-screen relative overflow-hidden bg-gray-900"
+      className="relative overflow-hidden bg-cream-50"
+      style={{ height: "100vh", maxHeight: "900px" }}
     >
-      {/* Background Effects */}
-      <div className="absolute inset-0 bg-black" />
-
-      {/* Animated stars */}
-      {mounted && (
-        <div className="absolute inset-0 overflow-hidden">
-          {stars.map((star) => (
-            <div
-              key={star.id}
-              className="absolute w-1 h-1 bg-white rounded-full opacity-30 animate-pulse"
-              style={{
-                left: `${star.left}%`,
-                top: `${star.top}%`,
-                animationDelay: `${star.delay}s`,
-                animationDuration: `${star.duration}s`,
-              }}
-            />
-          ))}
-        </div>
-      )}
-
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-52 md:pt-60">
         {/* Main Content */}
-        <div className="text-center h-[40rem] w-full flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
-            <Spotlight />I help founders turn{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">
-              ideas
-            </span>
+        <div className="text-center mb-4">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-gray-900 mb-5 leading-[1.1] tracking-tight">
+            I help founders turn ideas
             <br />
-            into seamless{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 italic font-light">
-              digital experiences
-            </span>
+            into{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">seamless</span>
+              <span className="absolute inset-0 bg-lime-accent rounded-lg -skew-x-2 scale-105 z-0" />
+            </span>{" "}
+            digital experiences!
           </h1>
-          <div className="w-full max-w-5xl h-40 relative bg-black rounded-md overflow-hidden mx-auto">
-            {/* Gradients */}
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
-            <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />
-            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-[5px] w-1/4 blur-sm" />
-            <div className="absolute inset-x-60 top-0 bg-gradient-to-r from-transparent via-sky-500 to-transparent h-px w-1/4" />
-            <SparklesCore
-              background="black"
-              minSize={0.4}
-              maxSize={1}
-              particleDensity={1200}
-              className="w-full h-full"
-              particleColor="#FFFFFF"
-            />
-            {/* Radial Gradient to prevent sharp edges */}
-            <div className="absolute inset-0 w-full h-full bg-black [mask-image:radial-gradient(850px_200px_at_top,transparent_20%,white)]"></div>
-          </div>
+          <p className="text-gray-500 text-base md:text-lg max-w-3xl mx-auto mb-6 leading-relaxed">
+            Senior Software Engineer with 4+ years across fintech, SaaS, and AI
+            — shipping production React, TypeScript, and Node.js with a serious
+            taste for clean code.
+          </p>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 bg-lime-accent hover:bg-lime-dark text-gray-900 font-semibold rounded-full px-7 py-3 text-base transition-colors duration-200"
+          >
+            Get Started
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute left-1/2 -translate-x-1/2 bottom-[60px]">
-        <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex justify-center">
-          <div className="w-1 h-3 bg-gradient-to-b from-blue-400 to-purple-400 rounded-full mt-2 animate-bounce" />
-        </div>
+      {/* Globe - positioned lower, showing only top portion */}
+      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-[58%] w-[700px] h-[700px] md:w-[800px] md:h-[800px] lg:w-[900px] lg:h-[900px] z-0">
+        <Globe className="w-full" />
       </div>
     </section>
   );

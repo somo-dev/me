@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { Menu, X, Command } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { IconMail, IconMailCheck } from "@tabler/icons-react";
-import { Button } from "@/components/ui/button";
 
 const navigation = [
   { name: "Home", href: "#home" },
@@ -29,8 +28,7 @@ export default function Navbar() {
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      // Find the currently active section
-      const sectionIds = navigation.map((item) => item.href.replace('#', ''));
+      const sectionIds = navigation.map((item) => item.href.replace("#", ""));
       let found = "#home";
       for (const id of sectionIds) {
         const el = document.getElementById(id);
@@ -48,7 +46,7 @@ export default function Navbar() {
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-gray-900/80 backdrop-blur-md border-b border-gray-800"
+          ? "bg-cream-50/80 backdrop-blur-md border-b border-cream-300"
           : "bg-transparent"
       }`}
     >
@@ -56,15 +54,19 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-              <Command className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 bg-lime-accent rounded-full flex items-center justify-center shrink-0">
+              <span className="text-gray-900 font-bold text-sm">SP</span>
             </div>
-            <span className="text-white font-bold text-xl">SP</span>
+            {!isOpen && (
+              <span className="text-gray-900 font-bold text-lg">
+                Soumya Pal
+              </span>
+            )}
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:block">
-            <div className="bg-gray-800/50 backdrop-blur-sm rounded-full px-6 py-2 border border-gray-700">
+            <div className="bg-white/60 backdrop-blur-sm rounded-full px-6 py-2 border border-cream-300">
               <div className="flex items-center space-x-8">
                 {navigation.map((item) => (
                   <Link
@@ -72,32 +74,27 @@ export default function Navbar() {
                     href={item.href}
                     className={
                       activeSection === item.href
-                        ? "px-4 py-1 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative transition-colors duration-200"
-                        : "text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                        ? "px-4 py-1 text-sm bg-lime-accent text-gray-900 font-semibold rounded-full transition-colors duration-200"
+                        : "text-gray-600 hover:text-gray-900 transition-colors duration-200 text-sm font-medium"
                     }
                   >
                     {item.name}
-                    {activeSection === item.href && (
-                      <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
-                    )}
                   </Link>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* CTA Button */}
+          {/* CTA Buttons */}
           <div className="hidden md:block">
-            {/* <Button
-              asChild
-              className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white rounded-full px-6 py-2"
-            >
-              <Link href="#contact">Book a Call</Link>
-            </Button> */}
-            <div className="flex items-center gap-2 mt-0">
+            <div className="flex items-center gap-2">
               <button
                 onClick={handleCopyEmail}
-                className={`h-9 flex items-center justify-center text-gray-300 hover:text-white transition-colors duration-200 rounded-full border relative ${copied ? "px-4 py-2 text-sm backdrop-blur-sm bg-emerald-300/10 border-emerald-500/20 text-white" : "px-4 py-1.5 text-sm bg-gray-800/20 backdrop-blur-sm border-gray-700 hover:border-gray-600"}`}
+                className={`h-9 flex items-center justify-center transition-colors duration-200 rounded-full border ${
+                  copied
+                    ? "px-4 py-2 text-sm bg-lime-accent border-lime-dark text-gray-900 font-medium"
+                    : "px-4 py-1.5 text-sm bg-white/60 backdrop-blur-sm border-cream-300 text-gray-600 hover:text-gray-900 hover:border-gray-400"
+                }`}
                 aria-label="Copy email address"
               >
                 {copied ? (
@@ -105,14 +102,13 @@ export default function Navbar() {
                 ) : (
                   <IconMail className="w-5 h-5" />
                 )}
-                <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
               </button>
-              <button className="px-4 py-2 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative">
-                <a href="#contact" className="flex items-center space-x-2">
-                  Book a Call
-                </a>
-                <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
-              </button>
+              <a
+                href="#contact"
+                className="px-5 py-2 text-sm bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors duration-200"
+              >
+                Contacts
+              </a>
             </div>
           </div>
 
@@ -120,7 +116,7 @@ export default function Navbar() {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white transition-colors duration-200"
+              className="text-gray-600 hover:text-gray-900 transition-colors duration-200"
             >
               {isOpen ? (
                 <X className="w-6 h-6" />
@@ -133,7 +129,7 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="md:hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800">
+          <div className="md:hidden bg-cream-50/95 backdrop-blur-md border-t border-cream-300 rounded-b-2xl">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
                 <Link
@@ -141,21 +137,22 @@ export default function Navbar() {
                   href={item.href}
                   className={
                     activeSection === item.href
-                      ? "block px-4 py-1 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative transition-colors duration-200"
-                      : "block px-3 py-2 text-gray-300 hover:text-white transition-colors duration-200"
+                      ? "block px-4 py-2 text-sm bg-lime-accent text-gray-900 font-semibold rounded-full transition-colors duration-200"
+                      : "block px-3 py-2 text-gray-600 hover:text-gray-900 transition-colors duration-200"
                   }
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
-                  {activeSection === item.href && (
-                    <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
-                  )}
                 </Link>
               ))}
               <div className="pt-2 flex items-center gap-2">
                 <button
                   onClick={handleCopyEmail}
-                  className={`flex items-center justify-center text-gray-300 hover:text-white transition-colors duration-200 rounded-full border relative ${copied ? "px-4 py-2 text-sm backdrop-blur-sm bg-emerald-300/10 border-emerald-500/20 text-white" : "px-4 py-1.5 text-sm bg-gray-800/20 backdrop-blur-sm border-gray-700 hover:border-gray-600"}`}
+                  className={`flex items-center justify-center transition-colors duration-200 rounded-full border ${
+                    copied
+                      ? "px-4 py-2 text-sm bg-lime-accent border-lime-dark text-gray-900"
+                      : "px-4 py-1.5 text-sm bg-white/60 border-cream-300 text-gray-600"
+                  }`}
                   aria-label="Copy email address"
                 >
                   {copied ? (
@@ -163,14 +160,13 @@ export default function Navbar() {
                   ) : (
                     <IconMail className="w-5 h-5" />
                   )}
-                  <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
                 </button>
-                <button className="px-4 py-2 text-sm backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white rounded-full relative">
-                  <a href="#contact" className="flex items-center space-x-2">
-                    Book a Call
-                  </a>
-                  <div className="absolute inset-x-0 h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
-                </button>
+                <a
+                  href="#contact"
+                  className="px-5 py-2 text-sm bg-gray-900 text-white rounded-full font-medium"
+                >
+                  Contacts
+                </a>
               </div>
             </div>
           </div>
