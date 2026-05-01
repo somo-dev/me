@@ -2,7 +2,6 @@
 
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import { motion } from "motion/react";
 import { FlipWords } from "@/components/ui/flip-words";
 
 const Globe = dynamic(() => import("@/components/ui/globe"), { ssr: false });
@@ -26,16 +25,6 @@ export default function Hero() {
                 <FlipWords
                   words={["seamless", "scalable", "intuitive", "elegant"]}
                   className="px-0 py-0 text-gray-900"
-                />
-                <motion.span
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{
-                    duration: 0.8,
-                    repeat: Infinity,
-                    repeatType: "reverse",
-                  }}
-                  className="inline-block w-[3px] md:w-[4px] h-8 md:h-10 lg:h-14 bg-lime-dark ml-1 rounded-sm"
                 />
               </span>
               <span className="absolute inset-0 bg-lime-accent rounded-lg -skew-x-2 scale-105 z-0" />
