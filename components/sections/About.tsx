@@ -2,12 +2,14 @@
 
 import { AnimatedTestimonials } from "@/components/ui/animated-testimonials";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const images = [
-  { src: "/about/adv_trail.avif", description: "I ride" },
-  { src: "/about/camera.avif", description: "I click" },
-  { src: "/about/travel.avif", description: "I travel" },
-  { src: "/about/gym.jpg", description: "I train" },
-  { src: "/about/code.avif", description: "I code" },
+  { src: `${basePath}/about/adv_trail.avif`, description: "I ride" },
+  { src: `${basePath}/about/camera.avif`, description: "I click" },
+  { src: `${basePath}/about/travel.avif`, description: "I travel" },
+  { src: `${basePath}/about/gym.jpg`, description: "I train" },
+  { src: `${basePath}/about/code.avif`, description: "I code" },
 ];
 
 export default function About() {
