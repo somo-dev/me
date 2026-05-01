@@ -5,6 +5,8 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { IconMail, IconMailCheck } from "@tabler/icons-react";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 const navigation = [
   { name: "Home", href: "#home" },
   { name: "About", href: "#about" },
@@ -54,8 +56,12 @@ export default function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-lime-accent rounded-full flex items-center justify-center shrink-0">
-              <span className="text-gray-900 font-bold text-sm">SP</span>
+            <div className="w-8 h-8 bg-lime-accent rounded-full flex items-center justify-center shrink-0 overflow-hidden">
+              <img
+                src={`${basePath}/about/man.png`}
+                alt="Soumya Pal"
+                className="w-full h-full object-cover"
+              />
             </div>
             {!isOpen && (
               <span className="text-gray-900 font-bold text-lg">
