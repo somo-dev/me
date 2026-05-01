@@ -106,7 +106,7 @@ export default function Experience() {
               My Journey
             </span>
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mt-2 mb-6 leading-tight">
-              4+ years turning
+              5+ years turning
               <br />
               ideas into{" "}
               <span className="relative inline-block">

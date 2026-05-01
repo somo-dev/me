@@ -32,7 +32,7 @@ export default function Hero() {
             digital experiences!
           </h1>
           <p className="text-gray-500 text-base md:text-lg max-w-3xl mx-auto mb-6 leading-relaxed">
-            Senior Software Engineer with 4+ years across fintech, SaaS, and AI
+            Senior Software Engineer with 5+ years across fintech, SaaS, and AI
             — shipping production React, Next.js, TypeScript, Node.js, and .NET
             with a serious taste for clean code.
           </p>
