@@ -2,6 +2,7 @@
 
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
+import { TypewriterEffect } from "@/components/ui/typewriter-effect";
 
 const Globe = dynamic(() => import("@/components/ui/globe"), { ssr: false });
 
@@ -19,8 +20,14 @@ export default function Hero() {
             I help founders turn ideas
             <br />
             into{" "}
-            <span className="relative inline-block">
-              <span className="relative z-10">seamless</span>
+            <span className="relative inline-block align-baseline">
+              <span className="relative z-10">
+                <TypewriterEffect
+                  words={[{ text: "seamless" }]}
+                  className="inline-block text-5xl md:text-6xl lg:text-7xl font-bold text-left"
+                  cursorClassName="bg-lime-dark h-8 md:h-10 lg:h-14"
+                />
+              </span>
               <span className="absolute inset-0 bg-lime-accent rounded-lg -skew-x-2 scale-105 z-0" />
             </span>{" "}
             digital experiences!
