@@ -2,7 +2,8 @@
 
 import { ArrowRight } from "lucide-react";
 import dynamic from "next/dynamic";
-import { TypewriterEffect } from "@/components/ui/typewriter-effect";
+import { motion } from "motion/react";
+import { FlipWords } from "@/components/ui/flip-words";
 
 const Globe = dynamic(() => import("@/components/ui/globe"), { ssr: false });
 
@@ -20,12 +21,21 @@ export default function Hero() {
             I help founders turn ideas
             <br />
             into{" "}
-            <span className="relative inline-block align-baseline">
-              <span className="relative z-10">
-                <TypewriterEffect
-                  words={[{ text: "seamless" }]}
-                  className="inline-block text-5xl md:text-6xl lg:text-7xl font-bold text-left"
-                  cursorClassName="bg-lime-dark h-8 md:h-10 lg:h-14"
+            <span className="relative inline-flex items-center align-baseline">
+              <span className="relative z-10 inline-flex items-center">
+                <FlipWords
+                  words={["seamless", "scalable", "intuitive", "elegant"]}
+                  className="px-0 py-0 text-gray-900"
+                />
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{
+                    duration: 0.8,
+                    repeat: Infinity,
+                    repeatType: "reverse",
+                  }}
+                  className="inline-block w-[3px] md:w-[4px] h-8 md:h-10 lg:h-14 bg-lime-dark ml-1 rounded-sm"
                 />
               </span>
               <span className="absolute inset-0 bg-lime-accent rounded-lg -skew-x-2 scale-105 z-0" />
